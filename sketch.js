@@ -35,17 +35,17 @@ function preload(){
 function setup() {
   createCanvas(windowWidth, windowHeight);
   
-  trex = createSprite(50,height-60,20,50);
+  trex = createSprite(50,height-70,20,50);
   
   trex.addAnimation("running", trex_running);
   trex.addAnimation("collided", trex_collided);
   trex.scale = 0.5;
   
-  ground = createSprite(width/2,height-30,width,20);
+  ground = createSprite(width/2,height-60,width,20);
   ground.addImage("ground",groundImage);
   ground.velocityX = -(6 + 3*score/100);
   
-  gameOver = createSprite(width/2-50,height/2-50);
+  gameOver = createSprite(width/2-30,height/2-50);
   gameOver.addImage(gameOverImg);
   
   restart = createSprite(width/2,height/2);
@@ -57,7 +57,7 @@ function setup() {
   gameOver.visible = false;
   restart.visible = false;
   
-  invisibleGround = createSprite(width/2,height-20,width,10);
+  invisibleGround = createSprite(width/2,height-50,width,10);
   invisibleGround.visible = false;
   
   cloudsGroup = new Group();
@@ -69,7 +69,7 @@ function setup() {
 function draw() {
   //trex.debug = true;
   background(255);
-  text("Score: "+ score, 500,50);
+  text("Score: "+ score, width-100,50);
   
   if (gameState===PLAY){
     score = score + Math.round(getFrameRate()/60);
@@ -77,7 +77,7 @@ function draw() {
     //change the trex animation
     trex.changeAnimation("running", trex_running);
     
-    if(keyDown("space") && trex.y >= height - 50) {
+    if(keyDown("space") && trex.y >= height -60) {
       trex.velocityY = -12;
     }
   
@@ -131,7 +131,7 @@ function spawnClouds() {
     cloud.velocityX = -3;
     
      //assign lifetime to the variable
-    cloud.lifetime = 200;
+    cloud.lifetime = width/cloud.velocityX;
     
     //adjust the depth
     cloud.depth = trex.depth;
@@ -155,7 +155,7 @@ function reset(){
 
 function spawnObstacles() {
   if(frameCount % 60 === 0) {
-    var obstacle = createSprite(width+20,height-30,10,40);
+    var obstacle = createSprite(width+20,height-50,10,40);
     //obstacle.debug = true;
     obstacle.velocityX = -(6 + 3*score/100);
     
@@ -179,7 +179,7 @@ function spawnObstacles() {
     
     //assign scale and lifetime to the obstacle           
     obstacle.scale = 0.5;
-    obstacle.lifetime = 300;
+    obstacle.lifetime = width/obstacle.velocityX;
     //add each obstacle to the group
     obstaclesGroup.add(obstacle);
   }
