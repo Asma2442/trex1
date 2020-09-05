@@ -45,7 +45,7 @@ function setup() {
   ground.addImage("ground",groundImage);
   ground.velocityX = -(6 + 3*score/100);
   
-  gameOver = createSprite(width/2-30,height/2-50);
+  gameOver = createSprite(width/2,height/2-50);
   gameOver.addImage(gameOverImg);
   
   restart = createSprite(width/2,height/2);
@@ -77,8 +77,9 @@ function draw() {
     //change the trex animation
     trex.changeAnimation("running", trex_running);
     
-    if(keyDown("space") && trex.y >= height -60) {
+    if(touches.length > 0 || keyDown("space") && trex.y >= height -120) {
       trex.velocityY = -12;
+      touches = [];
     }
   
     trex.velocityY = trex.velocityY + 0.8
@@ -155,7 +156,7 @@ function reset(){
 
 function spawnObstacles() {
   if(frameCount % 60 === 0) {
-    var obstacle = createSprite(width+20,height-50,10,40);
+    var obstacle = createSprite(width+20,height-95,10,40);
     //obstacle.debug = true;
     obstacle.velocityX = -(6 + 3*score/100);
     
