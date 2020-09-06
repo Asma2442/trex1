@@ -41,9 +41,9 @@ function setup() {
   trex.addAnimation("collided", trex_collided);
   trex.scale = 0.5;
   
-  ground = createSprite(width,height-60,width+200,20);
+  ground = createSprite(width/2,height-60,width+200,20);
   ground.addImage("ground",groundImage);
-  ground.velocityX = -(6 + 3*score/100);
+  ground.velocityX = -(8 + 3*score/100);
   
   gameOver = createSprite(width/2,height/2-50);
   gameOver.addImage(gameOverImg);
@@ -73,7 +73,7 @@ function draw() {
   
   if (gameState===PLAY){
     score = score + Math.round(getFrameRate()/60);
-    ground.velocityX = -(6 + 3*score/100);
+    ground.velocityX = -(8 + 3*score/100);
     //change the trex animation
     trex.changeAnimation("running", trex_running);
     
@@ -113,8 +113,9 @@ function draw() {
     obstaclesGroup.setLifetimeEach(-1);
     cloudsGroup.setLifetimeEach(-1);
     
-    if(mousePressedOver(restart)) {
+    if(touches.length>0 || mousePressedOver(restart)) {
       reset();
+      touches = [];
     }
   }
   
@@ -129,7 +130,7 @@ function spawnClouds() {
     cloud.y = Math.round(random(100,220));
     cloud.addImage(cloudImage);
     cloud.scale = 0.5;
-    cloud.velocityX = -3;
+    cloud.velocityX = -4;
     
      //assign lifetime to the variable
     cloud.lifetime = width/cloud.velocityX;
@@ -158,7 +159,7 @@ function spawnObstacles() {
   if(frameCount % 60 === 0) {
     var obstacle = createSprite(width+20,height-75,10,40);
     //obstacle.debug = true;
-    obstacle.velocityX = -(6 + 3*score/100);
+    obstacle.velocityX = -(7 + 3*score/100);
     
     //generate random obstacles
     var rand = Math.round(random(1,6));
