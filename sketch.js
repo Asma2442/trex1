@@ -77,7 +77,7 @@ function draw() {
     //change the trex animation
     trex.changeAnimation("running", trex_running);
     
-    if(touches.length > 0 || keyDown("space") && trex.y >= height -120) {
+    if((touches.length > 0 || keyDown("space")) && trex.y >= height -120) {
       trex.velocityY = -12;
       touches = [];
     }
