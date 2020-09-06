@@ -156,7 +156,7 @@ function reset(){
 
 function spawnObstacles() {
   if(frameCount % 60 === 0) {
-    var obstacle = createSprite(width+20,height-95,10,40);
+    var obstacle = createSprite(width+20,height-75,10,40);
     //obstacle.debug = true;
     obstacle.velocityX = -(6 + 3*score/100);
     
